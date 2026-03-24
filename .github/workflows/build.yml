@@ -1,4 +1,4 @@
-name: test
+name: 12
 
 on:
   push:
