@@ -3,7 +3,7 @@ name: 构建
 on:
   push:
     branches: [ 'main' ]
-    paths: [ 'version.txt' ]
+  workflow_dispatch:
 
 env:
   APP_NAME: taoSync
