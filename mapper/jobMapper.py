@@ -150,6 +150,7 @@ def deleteJobLogByJobId(jobId):
     sqlBase.execute_update("delete from job_task_item where "
                            "taskId in (select id from job_task where jobId=?)", (jobId,))
     sqlBase.execute_update("delete from job_task where jobId=?", (jobId,))
+    sqlBase.vacuum_db()
 
 
 def addJobTaskItemMany(jobTaskItemList):

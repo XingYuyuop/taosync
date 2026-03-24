@@ -114,6 +114,13 @@ def execute_update(conn, query, params=()):
     cursor.close()
 
 
+@connect_sql
+def vacuum_db(conn):
+    cursor = conn.cursor()
+    cursor.execute("VACUUM")
+    cursor.close()
+
+
 def check_and_add_sql(sql, params, data):
     """
     检查字段并自动生成sql
