@@ -123,6 +123,15 @@ def removeTask(taskId):
     jobMapper.deleteJobTaskByTaskId(taskId)
 
 
+def removeJobLog(jobId):
+    """
+    删除作业的所有日志
+    :param jobId: 作业id
+    :return:
+    """
+    jobMapper.deleteJobLogByJobId(jobId)
+
+
 def getTaskItemList(req):
     """
     任务详情列表

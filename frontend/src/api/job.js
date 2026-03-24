@@ -153,6 +153,20 @@ export function jobDeleteTask(taskId) {
 	})
 }
 
+// 删除作业日志
+export function jobDeleteLog(jobId) {
+	return request({
+		url: '/job',
+		headers: {
+			isMask: false
+		},
+		method: 'delete',
+		data: {
+			jobId
+		}
+	})
+}
+
 // 任务详情列表
 export function jobGetTaskItem(params) {
 	return request({

@@ -1,7 +1,12 @@
 <template>
 	<div class="task" :style="`min-height: calc(320px + ${currentHeight}px)`">
 		<div class="top-box">
-			<el-button type="primary" icon="el-icon-back" size="small" @click="goback">返回</el-button>
+			<div style="display: flex; align-items: center;">
+				<el-button type="primary" icon="el-icon-back" size="small" @click="goback"
+					style="margin-right: 12px;">返回</el-button>
+				<el-button type="danger" icon="el-icon-delete" size="small" @click="delLog"
+					:loading="btnLoading">删除日志</el-button>
+			</div>
 			<div class="top-box-title">作业详情</div>
 			<menuRefresh :loading="loading" :autoRefresh="false" :needShow="1" @getData="getTaskList"></menuRefresh>
 		</div>
@@ -77,7 +82,8 @@
 <script>
 	import {
 		jobGetTask,
-		jobDeleteTask
+		jobDeleteTask,
+		jobDeleteLog
 	} from "@/api/job";
 	import menuRefresh from './components/menuRefresh';
 	import taskCurrent from './components/taskCurrent';
@@ -129,6 +135,25 @@
 				}).then(() => {
 					this.btnLoading = true;
 					jobDeleteTask(taskId).then(res => {
+						this.btnLoading = false;
+						this.$message({
+							message: res.msg,
+							type: 'success'
+						});
+						this.getTaskList();
+					}).catch(err => {
+						this.btnLoading = false;
+					})
+				});
+			},
+			delLog() {
+				this.$confirm("操作不可逆，将永久删除该作业的所有日志记录，确定吗？", '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					this.btnLoading = true;
+					jobDeleteLog(this.params.id).then(res => {
 						this.btnLoading = false;
 						this.$message({
 							message: res.msg,

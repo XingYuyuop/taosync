@@ -86,3 +86,5 @@ class Job(BaseHandler):
             jobService.removeJobClient(req['id'])
         elif 'taskId' in req:
             taskService.removeTask(req['taskId'])
+        elif 'jobId' in req:
+            taskService.removeJobLog(req['jobId'])
